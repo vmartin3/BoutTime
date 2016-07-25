@@ -43,7 +43,7 @@ class ViewController: UIViewController, SFSafariViewControllerDelegate {
     var gameTimer = NSTimer()
     var timerCounter = 60
     var indexOfSelectedEvent: Int = 0
-    //var choices: [UILabel] = []
+    var choices: [UILabel] = []
     
     enum ButtonType: Int
     {
@@ -106,13 +106,11 @@ class ViewController: UIViewController, SFSafariViewControllerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        choices = [mostRecentEvent,secondEvent, thirdEvent, oldestEvent]
         GameModel.correctRounds = 0
         startTimer()
         displayQuestion()
         
-        //For testing purpose uncomment the below line and other places where 'choices' is used to see correct date of the event placed
-        //next to the correct text
-        //choices = [mostRecentEvent,secondEvent, thirdEvent, oldestEvent]
     }
 
     override func didReceiveMemoryWarning() {
@@ -161,7 +159,7 @@ class ViewController: UIViewController, SFSafariViewControllerDelegate {
     func displayQuestion() {
         //Generates a random number to select an event that has not been used yet. If an event that has been
         //used is selected it will generate a new one until that is not the case
-        for _ in 0..<settings.numOfOptions
+        for i in 0..<settings.numOfOptions
         {
         indexOfSelectedEvent = generateRandomNumber(upperBound: eventSet.count)
         while usedEvents.contains(indexOfSelectedEvent){
@@ -172,7 +170,7 @@ class ViewController: UIViewController, SFSafariViewControllerDelegate {
         historicalEvent.append(eventSet[indexOfSelectedEvent])
         let event = eventSet[indexOfSelectedEvent]
             
-        //choices[i].text = "\(event.event) \(event.date)"
+        choices[i].text = "\(event.event)"
         }
     }
     
